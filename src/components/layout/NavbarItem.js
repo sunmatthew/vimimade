@@ -1,17 +1,28 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Import the useNavigate hook
-import { TextTitle } from '../text/TextTitle'; // Import your TextTitle component
+import React, { useCallback, useMemo } from 'react';
+import { useNavigate, useLocation  } from 'react-router-dom';
+import { TextBody } from '../text/TextBody';
 
-export const NavbarItem = ({ label, route }) => {
-  const navigate = useNavigate(); // Get the navigate function
+export const NavbarItem = ({ label, route, icon = undefined }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleClick = () => {
-    navigate(route); // Navigate to the specified route
-  };
+  const handleClick = useCallback(() => {
+    if (route.startsWith('#')) {
+      const sectionId = route.substring(1);
+      const sectionEl = document.getElementById(sectionId);
+      if (sectionEl) {
+        sectionEl.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      navigate(route);
+    }
+  }, [route, navigate]);
+
+  const isActive = useMemo(() => !route.startsWith('#') && location.pathname === route, [route, location]);
 
   return (
-    <div onClick={handleClick} style={{ cursor: 'pointer' }}>
-      <TextTitle>{label}</TextTitle>
+    <div onClick={handleClick} style={{ cursor: 'pointer' }} height="100%">
+      {icon ? icon : <TextBody variants={isActive ? ['bold'] : []}>{label}</TextBody>}
     </div>
   );
 };

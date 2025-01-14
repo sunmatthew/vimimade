@@ -3,10 +3,13 @@ import { Color } from '../../styles/color';
 
 export const Navbar = ({
   children,
-  color = Color.PRIMARY,
+  color = Color.SECONDARY,
   gap = 0,
   align = 'left', // 'left', 'center', 'right'
   vSpacing = 0,
+  textColor,
+  isBottom = false,
+  isFixed = false,
 }) => {
   const gapStyle = `${gap * 32}px`;
   const justifyContent = {
@@ -17,6 +20,7 @@ export const Navbar = ({
 
   const childStyle = {
     margin: '0px 0px',
+    color: textColor,
   };
 
   return (
@@ -24,6 +28,9 @@ export const Navbar = ({
       style={{
         width: '100%',
         backgroundColor: color,
+        marginTop: isBottom ? 'auto' : 0, 
+        position: isFixed ? 'fixed' : 'inherit',
+        bottom: isBottom && isFixed ? 0 : null,
       }}
     >
       <nav
@@ -32,9 +39,9 @@ export const Navbar = ({
           alignItems: 'center',
           gap: gapStyle,
           justifyContent: justifyContent,
-          width: '80%',
-          paddingTop: `${vSpacing * 2}px`, // Vertical margin (top)
-          paddingBottom: `${vSpacing * 2}px`, // Vertical margin (bottom)
+          paddingTop: `${vSpacing * 2}px`,
+          paddingBottom: `${vSpacing * 2}px`,
+          margin: '0px 0px',
         }}
       >
         {React.Children.map(children, (child) => (

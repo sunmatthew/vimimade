@@ -1,4 +1,8 @@
 export const Color = {
-  PRIMARY: '#fadfb5',
-  SECONDARY: '#48492e',
+  PRIMARY: '#48586d',
+  SECONDARY: '#bfcfe4',
+  WHITE: '#ffffff',
+  BLACK: '#000000',
+  SECONDARY_2: '#92a8c6',
+  BEIGHT_DARK: '#edc089',
 };

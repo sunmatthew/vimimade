@@ -1,14 +1,17 @@
 import React from 'react';
 import { Size, textStyle } from './shared';
 
-export const TextBody = ({ children, variant = '' }) => {
+export const TextBody = ({ children, variants = [], color, textAlign }) => {
   const style = {
     ...textStyle,
-    fontWeight: '400',
-    fontSize: Size.TITLE,
-    fontWeight: variant.includes('bold') ? 'bold' : 'normal',
-    textDecoration: variant.includes('underline') ? 'underline' : 'none',
-    fontStyle: variant.includes('italic') ? 'italic' : 'normal',
+    fontSize: Size.BODY,
+    fontWeight: variants.includes('bold') ? 'bold' : 'normal',
+    textDecoration: variants.includes('underline') ? 'underline' : 'none',
+    fontStyle: variants.includes('italic') ? 'italic' : 'normal',
+    color: color,
+    textAlign: textAlign,
+    margin: 0,
+    marginTop: '5px',
   };
 
   return <p style={style}>{children}</p>;
