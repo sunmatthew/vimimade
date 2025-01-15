@@ -13,13 +13,23 @@ export const VStack = ({
   spacingBottom=0,
   spacingTop=0,
 }) => {
-  const stackStyle = {
+  const pageContainerStyle = {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    overflow: "auto",
+    zIndex: -1,  
+  };
+
+  let stackStyle = {
     display: 'flex',
     flexDirection: 'column',
     gap: `${gap}px`,
     backgroundColor: color ? color :'transparent',
     width: width,
-    height: isPageContainer ? '100vh' : height,
+    height: height,
     justifyContent: justifyContent,
     alignItems: alignItems,
     paddingRight: spacingHorizontal,
@@ -27,6 +37,10 @@ export const VStack = ({
     paddingTop: spacingTop,
     paddingBottom: spacingBottom,
   };
+
+  if (isPageContainer) {
+    stackStyle = { ...stackStyle, ...pageContainerStyle }
+  }
 
   return <div style={stackStyle}>{children}</div>;
 };
