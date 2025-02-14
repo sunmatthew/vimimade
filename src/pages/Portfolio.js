@@ -6,7 +6,7 @@ import { FilterButton } from '../components/button'
 import { Color } from '../styles/color';
 import Logo from '../images/logo-no-text.png'
 
-const CONTENT_WIDTH = "1400px"
+const CONTENT_WIDTH = "1200px"
 const LOGO = <img src={Logo} width="35px" />;
 
 const PHOTOS = [
@@ -225,18 +225,18 @@ const Portfolio = () => {
         key={filteredPhotos.length}
         images={filteredPhotos} 
         rowHeight={400}
-        margin={4}
+        margin={10}
         enableImageSelection={false} 
       />
     );
   }, [filteredPhotos]);
 
   return (
-    <VStack color={Color.PRIMARY} isPageContainer>
+    <VStack color={Color.SECONDARY_2} isPageContainer>
       <VStack width="100%" alignItems='center'>
         <VStack gap={30} width={CONTENT_WIDTH} spacingTop="60px" spacingBottom="160px">
           <TextTitle color={Color.WHITE} textAlign='center'>PORTFOLIO</TextTitle>
-          <VStack color={Color.PRIMARY} gap={10}>
+          <VStack  gap={10}>
             <HStack gap={10}>
               <FilterButton content="All" onClick={() => handleFilterSelect("all")} active={selectedFilters.includes("all")} />
               <FilterButton content="Bowls" onClick={() => handleFilterSelect("bowls")} active={selectedFilters.includes("bowls")} />
@@ -251,10 +251,11 @@ const Portfolio = () => {
 
         <Navbar color={Color.BEIGHT_DARK} align="center" gap={2} textColor={Color.PRIMARY} vSpacing={10} isBottom isFixed>
           <NavbarItem icon={LOGO} route="/" />
+          <NavbarItem label="home" route="/" />
           <NavbarItem label="about" route="/#about-section" />
           <NavbarItem label="portfolio" route="/portfolio" />
           <NavbarItem label="contact" route="/contact" />
-          <NavbarItem label="commissions" route="/commissions" />
+          {/* <NavbarItem label="commissions" route="/commissions" /> */}
         </Navbar>
       </VStack>
     </VStack>

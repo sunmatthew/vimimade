@@ -1,8 +1,9 @@
 import { Color } from '../../styles/color';
 
 export const Size = {
-  TITLE: '48px',
-  BODY: '24px'
+  TITLE: '64px',
+  BODY: '24px',
+  ERROR: '12px'
 };
 
 export const textStyle = {

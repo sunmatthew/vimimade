@@ -1,10 +1,10 @@
 import React from 'react';
 import { Size, textStyle } from './shared';
 
-export const TextBody = ({ children, variants = [], color, textAlign }) => {
+export const TextBody = ({ children, variants = [], color, textAlign, error=false }) => {
   const style = {
     ...textStyle,
-    fontSize: Size.BODY,
+    fontSize: !error ? Size.BODY : Size.ERROR,
     fontWeight: variants.includes('bold') ? 'bold' : 'normal',
     textDecoration: variants.includes('underline') ? 'underline' : 'none',
     fontStyle: variants.includes('italic') ? 'italic' : 'normal',

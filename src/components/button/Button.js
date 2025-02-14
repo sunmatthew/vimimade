@@ -13,16 +13,16 @@ export const Button = ({
   const baseStyle = {
     backgroundColor: color ? color : Color.WHITE,
     width: 'fit-content',
-    padding: '20px 20px 15px 20px',
+    padding: '20px 20px 12px 20px',
     border: 'none',
-    borderRadius: '10px',
+    borderRadius: '25px',
     cursor: 'pointer',
     transition: 'background-color 0.3s ease-in-out',
   };
 
   const hoverStyle = {
     ...baseStyle,
-    backgroundColor: Color.PRIMARY,
+    backgroundColor: Color.PRIMARY_INACTIVE,
   };
 
   const buttonTextStyle = {

@@ -6,15 +6,16 @@ export const FilterButton = ({
   content='',
   onClick,
   active = false,
+  secondStyle = false,
  }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const activeStyle = {
-    backgroundColor: Color.BEIGHT_DARK_2
+    backgroundColor: secondStyle ? Color.BEIGHT_DARK_2 : Color.PRIMARY,
   };
 
   let baseStyle = {
-    backgroundColor: Color.BEIGHT_DARK,
+    backgroundColor: secondStyle ? Color.BEIGHT_DARK_2 : Color.PRIMARY_INACTIVE,
     width: 'fit-content',
     padding: '15px 20px 10px 20px',
     border: 'none',
@@ -33,7 +34,7 @@ export const FilterButton = ({
     fontSize: Size.BODY,
     color: Color.WHITE,
     margin: 0,
-    fontWeight: 'bold',
+    fontWeight: active ? 'bold' : '',
   };
 
   const handleOnClick = useCallback(() => {
