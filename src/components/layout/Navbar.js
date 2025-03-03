@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Color } from '../../styles/color';
+import { TextBody } from '../text/TextBody';
+import { HStack } from './HStack';
 import MobileMenu from '../../images/mobile-menu.png';
 import CloseMenu from '../../images/mobile-close-menu-icon.png';
 import { isMobileWidth } from '../../constants/breakpoints';
@@ -12,32 +15,34 @@ export const Navbar = ({
   textColor,
   isBottom = false,
   isFixed = false,
+  logo,
+  logoText,
+  logoRoute = '/',
 }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [horizontalPadding, setHorizontalPadding] = useState('100px');
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
       setIsMobile(isMobileWidth(width));
 
-      // Calculate responsive padding
       if (isMobileWidth(width)) {
         setHorizontalPadding('20px');
       } else {
-        // For larger screens, use vw with min/max bounds
         const vwPadding = Math.min(Math.max(width * 0.05, 40), 120);
         setHorizontalPadding(`${vwPadding}px`);
       }
     };
 
-    handleResize(); // Initial check
+    handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Prevent body scroll when menu is open
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -49,6 +54,20 @@ export const Navbar = ({
     };
   }, [isMenuOpen]);
 
+  const handleLogoClick = useCallback(() => {
+    if (logoRoute.startsWith('#')) {
+      const sectionId = logoRoute.substring(1);
+      const sectionEl = document.getElementById(sectionId);
+      if (sectionEl) {
+        sectionEl.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      navigate(logoRoute);
+    }
+  }, [logoRoute, navigate]);
+
+  const isLogoActive =
+    !logoRoute.startsWith('#') && location.pathname === logoRoute;
   const gapStyle = `${gap * 32}px`;
 
   const childStyle = {
@@ -64,12 +83,20 @@ export const Navbar = ({
     fontSize: '18px',
   };
 
-  // Split children into logo and nav items
-  const logo = React.Children.toArray(children).find(
-    (child) => child.type.name === 'NavbarLogo'
-  );
-  const navItems = React.Children.toArray(children).filter(
-    (child) => child.type.name !== 'NavbarLogo'
+  const logoComponent = logo && (
+    <div
+      onClick={handleLogoClick}
+      style={{ cursor: 'pointer', height: '100%' }}
+    >
+      <HStack gap={10}>
+        {logo}
+        {logoText && (
+          <TextBody variants={isLogoActive ? ['bold'] : []} color={textColor}>
+            {logoText}
+          </TextBody>
+        )}
+      </HStack>
+    </div>
   );
 
   return (
@@ -94,7 +121,7 @@ export const Navbar = ({
           paddingRight: horizontalPadding,
         }}
       >
-        <div style={childStyle}>{logo}</div>
+        <div style={childStyle}>{logoComponent}</div>
         {isMobile ? (
           <>
             {!isMenuOpen && (
@@ -122,12 +149,7 @@ export const Navbar = ({
                 padding: '20px',
               }}
             >
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'flex-end',
-                }}
-              >
+              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <div
                   onClick={() => setIsMenuOpen(false)}
                   style={{
@@ -153,7 +175,7 @@ export const Navbar = ({
                   gap: '10px',
                 }}
               >
-                {navItems.map((item, index) => (
+                {React.Children.map(children, (item, index) => (
                   <div
                     key={index}
                     style={mobileMenuItemStyle}
@@ -181,7 +203,7 @@ export const Navbar = ({
           </>
         ) : (
           <div style={{ display: 'flex', gap: gapStyle }}>
-            {navItems.map((item, index) => (
+            {React.Children.map(children, (item, index) => (
               <div key={index} style={childStyle}>
                 {item}
               </div>

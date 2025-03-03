@@ -14,18 +14,25 @@ export const TextInput = ({
     onChange(newValue);
   };
 
-  const inputStyle = {
+  const containerStyle = {
     width: width,
+    maxWidth: '100%',
+    boxSizing: 'border-box',
+  };
+
+  const inputStyle = {
+    width: '100%',
     padding: '12px',
     fontSize: '16px',
     border: `2px solid ${error ? '#ff0000' : '#ccc'}`,
     borderRadius: '12px',
     outline: 'none',
     fontFamily: FONTS.PRIMARY,
+    boxSizing: 'border-box',
   };
 
   return (
-    <div style={{ width: '100%' }}>
+    <div style={containerStyle}>
       {type === 'area' ? (
         <textarea
           value={value}

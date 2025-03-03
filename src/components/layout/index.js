@@ -1,6 +1,5 @@
 export { Navbar } from './Navbar';
+export { NavbarItem } from './NavbarItem';
 export { HStack } from './HStack';
 export { VStack } from './VStack';
-export { NavbarItem } from './NavbarItem';
-export { NavbarLogo } from './NavbarLogo';
 export { Box } from './Box';

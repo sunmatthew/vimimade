@@ -87,12 +87,8 @@ export const ContactSection = ({ isSmallScreen }) => {
           </TextBody>
         </VStack>
 
-        <VStack
-          width="100%"
-          gap={20}
-          // spacingHorizontal={isSmallScreen ? 10 : 40}
-        >
-          <form onSubmit={handleSubmit(onSubmit)}>
+        <VStack width="100%" gap={20}>
+          <form onSubmit={handleSubmit(onSubmit)} style={{ width: '100%' }}>
             <VStack width="100%" gap={10}>
               <Box
                 justifyContent="space-between"
@@ -102,6 +98,7 @@ export const ContactSection = ({ isSmallScreen }) => {
                 width="100%"
                 isSmallScreen={isSmallScreen}
                 defaultWidth="100%"
+                style={{ maxWidth: '100%' }}
               >
                 <Controller
                   name="name"
@@ -111,6 +108,7 @@ export const ContactSection = ({ isSmallScreen }) => {
                       {...field}
                       placeholder="Name"
                       error={errors.name ? true : ''}
+                      width={isSmallScreen ? '100%' : '45%'}
                     />
                   )}
                 />
@@ -123,6 +121,7 @@ export const ContactSection = ({ isSmallScreen }) => {
                       placeholder="Email"
                       type="email"
                       error={errors.email ? true : ''}
+                      width={isSmallScreen ? '100%' : '45%'}
                     />
                   )}
                 />
@@ -136,6 +135,7 @@ export const ContactSection = ({ isSmallScreen }) => {
                     placeholder="Message"
                     type="area"
                     error={errors.message ? true : ''}
+                    width="100%"
                   />
                 )}
               />

@@ -1,19 +1,13 @@
 import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  HStack,
-  VStack,
-  Navbar,
-  NavbarItem,
-  NavbarLogo,
-} from '../components/layout';
+import { HStack, VStack, Navbar, NavbarItem } from '../components/layout';
 import { TextTitle, TextBody } from '../components/text';
 import { Color } from '../styles/color';
 import { Button } from '../components/button';
 import Logo from '../images/logo-no-text.png';
 import BG from '../images/commission-banner.JPEG';
 
-const LOGO = <img src={Logo} width="35px" />;
+const LOGO = <img src={Logo} alt="Vimimade Logo" width="35px" />;
 
 const bgStyle = {
   width: '100%',
@@ -51,14 +45,10 @@ const Commissions = () => {
         textColor={Color.PRIMARY}
         vSpacing={10}
         isFixed
+        logo={LOGO}
+        logoText="VIMIMADE"
+        logoRoute="/"
       >
-        <NavbarLogo
-          logo={LOGO}
-          logoText="VIMIMADE"
-          route="/"
-          textColor={Color.BLACK}
-        />
-        <NavbarItem label="home" route="/" />
         <NavbarItem label="about" route="/" onClick={handleAboutClick} />
         <NavbarItem label="portfolio" route="/portfolio" />
         <NavbarItem label="commissions" route="/commissions" />
