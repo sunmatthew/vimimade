@@ -20,5 +20,6 @@ module.exports = {
     'react/prop-types': 'warn',
     'prettier/prettier': 'warn',
     'no-dupe-keys': 'warn',
+    'react/no-unescaped-entities': 'off', // Disable the unescaped entities warning
   },
 };

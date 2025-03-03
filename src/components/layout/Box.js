@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const HStack = ({
+export const Box = ({
   id,
   children,
   gap = 0,
@@ -12,16 +12,24 @@ export const HStack = ({
   spacingHorizontal = 0,
   spacingBottom = 0,
   spacingTop = 0,
-  flexDirection = 'row',
+  isSmallScreen = false,
+  defaultDirection = 'row',
+  smallScreenDirection = 'column',
+  smallScreenGap,
+  smallScreenWidth,
+  defaultWidth,
 }) => {
   const stackStyle = {
     display: 'flex',
-    flexDirection: flexDirection,
-    gap: `${gap * 1}px`,
+    flexDirection: isSmallScreen ? smallScreenDirection : defaultDirection,
+    gap: `${(isSmallScreen && smallScreenGap !== undefined ? smallScreenGap : gap) * 1}px`,
     backgroundColor: color ? color : 'transparent',
     alignItems: alignItems,
     justifyContent: justifyContent,
-    width: width,
+    width:
+      isSmallScreen && smallScreenWidth
+        ? smallScreenWidth
+        : defaultWidth || width,
     height: height,
     paddingRight: spacingHorizontal,
     paddingLeft: spacingHorizontal,

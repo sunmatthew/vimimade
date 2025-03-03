@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextBody } from './TextBody';
+import { FONTS } from '../../constants/fonts';
 
 export const TextInput = ({
   value,
@@ -7,8 +7,7 @@ export const TextInput = ({
   placeholder = '',
   error = '',
   type = 'text',
-//   color = 'black',
-  textAlign = 'left',
+  width = '100%',
 }) => {
   const handleChange = (e) => {
     const newValue = e.target.value;
@@ -16,23 +15,24 @@ export const TextInput = ({
   };
 
   const inputStyle = {
-    width: '100%',
+    width: width,
     padding: '12px',
     fontSize: '16px',
-    border: '1px solid #ccc',
+    border: `2px solid ${error ? '#ff0000' : '#ccc'}`,
     borderRadius: '12px',
     outline: 'none',
+    fontFamily: FONTS.PRIMARY,
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', width: '100%', gap: '5px' }}>
+    <div style={{ width: '100%' }}>
       {type === 'area' ? (
         <textarea
           value={value}
           onChange={handleChange}
           placeholder={placeholder}
           style={{ ...inputStyle, resize: 'vertical' }}
-          rows={10}
+          rows={3}
         />
       ) : (
         <input
@@ -42,11 +42,6 @@ export const TextInput = ({
           placeholder={placeholder}
           style={inputStyle}
         />
-      )}
-      {(error) && (
-        <TextBody color="red" textAlign={textAlign} error> 
-          {error}
-        </TextBody>
       )}
     </div>
   );

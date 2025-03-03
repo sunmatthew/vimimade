@@ -1,262 +1,191 @@
-import React, { useCallback, useMemo, useState } from 'react';
-import { Gallery } from "react-grid-gallery";
-import { HStack, VStack, Navbar, NavbarItem } from '../components/layout';
+import React, { useCallback, useMemo, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Gallery from 'react-photo-gallery';
+import {
+  HStack,
+  VStack,
+  Navbar,
+  NavbarItem,
+  NavbarLogo,
+} from '../components/layout';
 import { TextTitle } from '../components/text';
-import { FilterButton } from '../components/button'
+import { FilterButton } from '../components/button';
 import { Color } from '../styles/color';
-import Logo from '../images/logo-no-text.png'
+import { PHOTOS } from '../constants/photos';
+import Logo from '../images/logo-no-text.png';
 
-const CONTENT_WIDTH = "1200px"
 const LOGO = <img src={Logo} width="35px" />;
 
-const PHOTOS = [
-  {
-    key: "bowls,decorative,plates",
-    alt: '1024 768',
-    src: "../portfolio/1024 768.jpg",
-    width: 1024,
-    height: 768,
-  },
-  {
-    key: "bowls,food",
-    alt: '1074 681',
-    src: "../portfolio/1074 681.jpg",
-    width: 1074,
-    height: 681,
-  },
-  {
-    key: "bowls",
-    alt: '1075 1011',
-    src: "../portfolio/1075 1011.jpg",
-    width: 1075,
-    height: 1011,
-  },
-  {
-    key: "bowls,food",
-    alt: '1075 888',
-    src: "../portfolio/1075 888.jpg",
-    width: 1075,
-    height: 888,
-  },
-  {
-    key: "bowls",
-    alt: '1093 1033',
-    src: "../portfolio/1093 1033.jpg",
-    width: 1093,
-    height: 1033,
-  },
-  {
-    key: "bowls",
-    alt: '1282 796',
-    src: "../portfolio/1282 796.JPEG",
-    width: 1282,
-    height: 796,
-  },
-  {
-    key: "bowls",
-    alt: '664 503',
-    src: "../portfolio/664 503.jpg",
-    width: 664,
-    height: 503,
-  },
-  {
-    key: "bowls,decorative",
-    alt: '768 1024',
-    src: "../portfolio/768 1024.jpg",
-    width: 768,
-    height: 1024,
-  },
-  {
-    key: "bowls,plates,set",
-    alt: '972 859',
-    src: "../portfolio/972 859.jpg",
-    width: 972,
-    height: 859,
-  },
-  {
-    key: "bowls",
-    alt: '768 740',
-    src: "../portfolio/768 740.jpg",
-    width: 768,
-    height: 740,
-  },
-  {
-    key: "bowls",
-    alt: '768 801',
-    src: "../portfolio/768 801.jpg",
-    width: 768,
-    height: 801,
-  },
-  {
-    alt: '768 823',
-    src: "../portfolio/768 823.jpg",
-    width: 768,
-    height: 823,
-  },
-  {
-    key: "bowls",
-    alt: '768 832',
-    src: "../portfolio/768 832.jpg",
-    width: 768,
-    height: 832,
-  },
-  {
-    key: "bowls",
-    alt: '845 770',
-    src: "../portfolio/845 770.jpg",
-    width: 845,
-    height: 770,
-  },
-  {
-    key: "bowls",
-    alt: '890 1048',
-    src: "../portfolio/890 1048.jpg",
-    width: 890,
-    height: 1048,
-  },
-  {
-    key: "bowls",
-    alt: '890 795',
-    src: "../portfolio/890 795.jpg",
-    width: 890,
-    height: 795,
-  },
-  {
-    key: "bowls,plates",
-    alt: '922 1040',
-    src: "../portfolio/922 1040.jpg",
-    width: 922,
-    height: 1040,
-  },
-  {
-    key: "bowls",
-    alt: '922 1075',
-    src: "../portfolio/922 1075.jpg",
-    width: 922,
-    height: 1075,
-  },
-  {
-    alt: '922 741',
-    src: "../portfolio/922 741.jpg",
-    width: 922,
-    height: 741,
-  },
-  {
-    key: "bowls,plates",
-    alt: '922 789',
-    src: "../portfolio/922 789.jpg",
-    width: 922,
-    height: 789,
-  },
-  {
-    alt: '922 863',
-    src: "../portfolio/922 863.jpg",
-    width: 922,
-    height: 863,
-  },
-  {
-    key: "bowls",
-    alt: '922 888',
-    src: "../portfolio/922 888.jpg",
-    width: 922,
-    height: 888,
-  },
-  {
-    key: "bowls,plates,set",
-    alt: '935 610',
-    src: "../portfolio/935 610.jpg",
-    width: 935,
-    height: 610,
-  },
-  {
-    key: "bowls,decorative",
-    alt: '998 1331',
-    src: "../portfolio/998 1331.jpg",
-    width: 998,
-    height: 1331,
-  },
-  {
-    key: "bowls,food",
-    src: "../portfolio/1024 768 (2).jpg",
-    width: 1024,
-    height: 768,
-  },
-];
+// Hook to get window dimensions
+const useWindowSize = () => {
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return windowSize;
+};
+
+const getContentWidth = (screenWidth) => {
+  if (screenWidth <= 600) return '100%';
+  if (screenWidth <= 900) return '90%';
+  if (screenWidth <= 1200) return '80%';
+  return '1200px';
+};
 
 const Portfolio = () => {
-  const [selectedFilters, setSelectedFilters] = useState(["all"]);
+  const navigate = useNavigate();
+  const [selectedFilters, setSelectedFilters] = useState(['all']);
+  const { width } = useWindowSize();
 
-  const handleFilterSelect = useCallback((filter) => {
-    if (selectedFilters.includes(filter)) {
-      // if the last filter is deselected, auto-select the ALL filter
-      if (selectedFilters.length == 1) {
-        setSelectedFilters(["all"])
-      } else {
-        setSelectedFilters(selectedFilters.filter(f => f != filter));
-      }
-    } else {
-      // always deselect ALL if its the only one selected
-      if (selectedFilters.length === 1 && selectedFilters[0] === "all") {
-        setSelectedFilters([filter]);
-      } else {
-        setSelectedFilters([...selectedFilters, filter]);
-      }
-    }
-  }, [selectedFilters]);
+  // Determine number of columns based on screen width
+  const getColumns = useMemo(() => {
+    if (width <= 600) return 1;
+    if (width <= 900) return 2;
+    if (width <= 1200) return 3;
+    return 4;
+  }, [width]);
 
   const filteredPhotos = useMemo(() => {
-    if (selectedFilters.includes("all")) {
+    if (selectedFilters.includes('all')) {
       return PHOTOS;
     }
 
     return PHOTOS.filter((photo) => {
       if (photo.key) {
-        const tags = photo.key.split(",");
-        return selectedFilters.every(f => tags.includes(f));
-      } else {
-        return false
+        const tags = photo.key.split(',');
+        return selectedFilters.every((f) => tags.includes(f));
       }
+      return false;
     });
   }, [selectedFilters]);
 
   const renderGallery = useMemo(() => {
     return (
-      <Gallery 
-        key={filteredPhotos.length}
-        images={filteredPhotos} 
-        rowHeight={400}
+      <Gallery
+        photos={filteredPhotos}
+        direction="column"
+        columns={getColumns}
         margin={10}
-        enableImageSelection={false} 
       />
     );
-  }, [filteredPhotos]);
+  }, [filteredPhotos, getColumns]);
+
+  const handleAboutClick = useCallback(() => {
+    navigate('/', { state: { shouldScrollToAbout: true, from: 'portfolio' } });
+  }, [navigate]);
+
+  const handleContactClick = useCallback(() => {
+    navigate('/', {
+      state: { shouldScrollToContact: true, from: 'portfolio' },
+    });
+  }, [navigate]);
+
+  const handleFilterSelect = useCallback(
+    (filter) => {
+      if (selectedFilters.includes(filter)) {
+        // if the last filter is deselected, auto-select the ALL filter
+        if (selectedFilters.length == 1) {
+          setSelectedFilters(['all']);
+        } else {
+          setSelectedFilters(selectedFilters.filter((f) => f != filter));
+        }
+      } else {
+        // always deselect ALL if its the only one selected
+        if (selectedFilters.length === 1 && selectedFilters[0] === 'all') {
+          setSelectedFilters([filter]);
+        } else {
+          setSelectedFilters([...selectedFilters, filter]);
+        }
+      }
+    },
+    [selectedFilters]
+  );
+
+  const contentWidth = useMemo(() => getContentWidth(width), [width]);
 
   return (
     <VStack color={Color.SECONDARY_2} isPageContainer>
-      <VStack width="100%" alignItems='center'>
-        <VStack gap={30} width={CONTENT_WIDTH} spacingTop="60px" spacingBottom="160px">
-          <TextTitle color={Color.WHITE} textAlign='center'>PORTFOLIO</TextTitle>
-          <VStack  gap={10}>
+      <Navbar
+        color={Color.BEIGHT_DARK}
+        align="center"
+        gap={2}
+        textColor={Color.PRIMARY}
+        vSpacing={10}
+        isBottom
+        isFixed
+      >
+        <NavbarLogo
+          logo={LOGO}
+          logoText="VIMIMADE"
+          route="/"
+          textColor={Color.BLACK}
+        />
+        <NavbarItem label="home" route="/" />
+        <NavbarItem label="about" route="/" onClick={handleAboutClick} />
+        <NavbarItem label="portfolio" route="/portfolio" />
+        <NavbarItem label="commissions" route="/commissions" />
+        <NavbarItem label="contact" route="/" onClick={handleContactClick} />
+      </Navbar>
+
+      <VStack width="100%" alignItems="center">
+        <VStack
+          gap={30}
+          width={contentWidth}
+          spacingTop="60px"
+          spacingBottom="160px"
+        >
+          <TextTitle color={Color.WHITE} textAlign="center">
+            PORTFOLIO
+          </TextTitle>
+          <VStack gap={10}>
             <HStack gap={10}>
-              <FilterButton content="All" onClick={() => handleFilterSelect("all")} active={selectedFilters.includes("all")} />
-              <FilterButton content="Bowls" onClick={() => handleFilterSelect("bowls")} active={selectedFilters.includes("bowls")} />
-              <FilterButton content="Decorative" onClick={() => handleFilterSelect("decorative")} active={selectedFilters.includes("decorative")} />
-              <FilterButton content="Food" onClick={() => handleFilterSelect("food")} active={selectedFilters.includes("food")} />
-              <FilterButton content="Matching Set" onClick={() => handleFilterSelect("set")} active={selectedFilters.includes("set")} />
-              <FilterButton content="Plates" onClick={() => handleFilterSelect("plates")} active={selectedFilters.includes("plates")} />
+              <FilterButton
+                content="All"
+                onClick={() => handleFilterSelect('all')}
+                active={selectedFilters.includes('all')}
+              />
+              <FilterButton
+                content="Bowls"
+                onClick={() => handleFilterSelect('bowls')}
+                active={selectedFilters.includes('bowls')}
+              />
+              <FilterButton
+                content="Decorative"
+                onClick={() => handleFilterSelect('decorative')}
+                active={selectedFilters.includes('decorative')}
+              />
+              <FilterButton
+                content="Food"
+                onClick={() => handleFilterSelect('food')}
+                active={selectedFilters.includes('food')}
+              />
+              <FilterButton
+                content="Matching Set"
+                onClick={() => handleFilterSelect('set')}
+                active={selectedFilters.includes('set')}
+              />
+              <FilterButton
+                content="Plates"
+                onClick={() => handleFilterSelect('plates')}
+                active={selectedFilters.includes('plates')}
+              />
             </HStack>
             {renderGallery}
           </VStack>
         </VStack>
-
-        <Navbar color={Color.BEIGHT_DARK} align="center" gap={2} textColor={Color.PRIMARY} vSpacing={10} isBottom isFixed>
-          <NavbarItem icon={LOGO} route="/" />
-          <NavbarItem label="home" route="/" />
-          <NavbarItem label="about" route="/#about-section" />
-          <NavbarItem label="portfolio" route="/portfolio" />
-          <NavbarItem label="contact" route="/contact" />
-          {/* <NavbarItem label="commissions" route="/commissions" /> */}
-        </Navbar>
       </VStack>
     </VStack>
   );

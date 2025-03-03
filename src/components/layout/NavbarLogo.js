@@ -1,20 +1,20 @@
 import React, { useCallback, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { TextBody } from '../text/TextBody';
+import { HStack } from './HStack';
 
-export const NavbarItem = ({
-  label,
+export const NavbarLogo = ({
   route,
-  icon = undefined,
-  onClick = undefined,
+  logo,
+  logoText,
+  textColor,
+  align = 'left',
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleClick = useCallback(() => {
-    if (onClick) {
-      onClick();
-    } else if (route.startsWith('#')) {
+    if (route.startsWith('#')) {
       const sectionId = route.substring(1);
       const sectionEl = document.getElementById(sectionId);
       if (sectionEl) {
@@ -31,12 +31,18 @@ export const NavbarItem = ({
   );
 
   return (
-    <div onClick={handleClick} style={{ cursor: 'pointer' }} height="100%">
-      {icon ? (
-        icon
-      ) : (
-        <TextBody variants={isActive ? ['bold'] : []}>{label}</TextBody>
-      )}
+    <div
+      onClick={handleClick}
+      style={{ cursor: 'pointer', height: '100%', alignItems: align }}
+    >
+      <HStack gap={10}>
+        {logo}
+        {logoText && (
+          <TextBody variants={isActive ? ['bold'] : []} color={textColor}>
+            {logoText}
+          </TextBody>
+        )}
+      </HStack>
     </div>
   );
 };

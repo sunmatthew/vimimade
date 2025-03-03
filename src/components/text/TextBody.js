@@ -1,7 +1,13 @@
 import React from 'react';
 import { Size, textStyle } from './shared';
 
-export const TextBody = ({ children, variants = [], color, textAlign, error=false }) => {
+export const TextBody = ({
+  children,
+  variants = [],
+  color,
+  textAlign,
+  error = false,
+}) => {
   const style = {
     ...textStyle,
     fontSize: !error ? Size.BODY : Size.ERROR,
