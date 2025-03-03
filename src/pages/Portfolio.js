@@ -154,7 +154,7 @@ const Portfolio = () => {
   // );
 
   return (
-    <VStack color={Color.SECONDARY_2} isPageContainer>
+    <VStack color={Color.PRIMARY} isPageContainer>
       <Navbar
         color={Color.BEIGHT_DARK}
         align="center"
