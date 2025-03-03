@@ -1,4 +1,5 @@
 import { Color } from '../../styles/color';
+import { FONTS } from '../../constants/fonts';
 
 export const Size = {
   TITLE: '64px',
@@ -9,6 +10,6 @@ export const Size = {
 };
 
 export const textStyle = {
-  fontFamily: 'Atkinson Hyperlegible Next, sans-serif',
+  fontFamily: FONTS.PRIMARY,
   color: Color.PRIMARY,
 };
