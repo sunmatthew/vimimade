@@ -11,7 +11,7 @@ export const TextBody = ({
   const style = {
     ...textStyle,
     fontSize: !error ? Size.BODY : Size.ERROR,
-    fontWeight: variants.includes('bold') ? '400' : '300',
+    fontWeight: variants.includes('bold') ? '500' : '400',
     textDecoration: variants.includes('underline') ? 'underline' : 'none',
     fontStyle: variants.includes('italic') ? 'italic' : 'normal',
     color: color,
