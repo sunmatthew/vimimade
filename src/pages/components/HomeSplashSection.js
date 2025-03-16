@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { HStack, VStack, Box } from '../../components/layout';
 import { TextTitle, TextBody } from '../../components/text';
@@ -10,6 +10,8 @@ import { Size } from '../../components/text/shared';
 
 const CONTENT_MAX_WIDTH = 1300;
 const CONTENT_BREAKPOINT = 1350;
+
+const TITLE_BREAK_WIDTH = 1318;
 
 const getContentWidth = (width) => {
   if (width < CONTENT_BREAKPOINT) return '90%';
@@ -42,6 +44,8 @@ export const HomeSplashSection = ({ isSmallScreen }) => {
   const { width } = useWindowSize();
   const contentWidth = getContentWidth(width);
 
+  const isTitleBroken = useMemo(() => width <= TITLE_BREAK_WIDTH, [width]);
+
   const handleViewPortfolio = useCallback(() => {
     navigate('/portfolio');
   }, [navigate]);
@@ -55,7 +59,7 @@ export const HomeSplashSection = ({ isSmallScreen }) => {
       <div style={bgStyle}>
         <HStack justifyContent="center" height="100%">
           <HStack
-            justifyContent="center"
+            justifyContent={isTitleBroken ? 'left' : 'center'}
             width={contentWidth}
             height="100%"
             style={{ padding: isSmallScreen ? '0 20px' : 0 }}
@@ -63,21 +67,25 @@ export const HomeSplashSection = ({ isSmallScreen }) => {
             <VStack
               height="100%"
               justifyContent="center"
-              alignItems="center"
-              gap={20}
+              alignItems={isTitleBroken ? 'left' : 'center'}
+              gap={30}
             >
-              <VStack alignItems="center" gap={10}>
+              <VStack alignItems={isTitleBroken ? 'left' : 'center'} gap={10}>
                 <TextTitle
                   color={Color.WHITE}
                   letterSpacing="10px"
                   sizeOverride={Size.TITLE_BIG}
                   fontWeightOverride="600"
+                  lineHeightOverride="1.4"
                 >
                   {isSmallScreen
                     ? SPLASH_CONTENT.SMALL_SCREEN.title
                     : SPLASH_CONTENT.DEFAULT.title}
                 </TextTitle>
-                <TextBody color={Color.WHITE} textAlign="center">
+                <TextBody
+                  color={Color.WHITE}
+                  textAlign={isTitleBroken ? 'left' : 'center'}
+                >
                   {isSmallScreen
                     ? SPLASH_CONTENT.SMALL_SCREEN.text
                     : SPLASH_CONTENT.DEFAULT.text}
@@ -88,7 +96,7 @@ export const HomeSplashSection = ({ isSmallScreen }) => {
                 gap={20}
                 smallScreenGap={10}
                 isSmallScreen={isSmallScreen}
-                justifyContent="center"
+                justifyContent={isTitleBroken ? 'left' : 'center'}
               >
                 <Button
                   content="View Portfolio"

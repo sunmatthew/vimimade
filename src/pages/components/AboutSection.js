@@ -13,9 +13,11 @@ const getContentWidth = (width) => {
   return `${CONTENT_MAX_WIDTH}px`;
 };
 
-export const AboutSection = ({ isSmallScreen }) => {
+export const AboutSection = () => {
   const { width } = useWindowSize();
   const contentWidth = getContentWidth(width);
+
+  const isSmallScreen = width < 1250;
 
   return isSmallScreen ? (
     <AboutSectionMobile />
@@ -85,6 +87,7 @@ const AboutSectionMobile = () => {
       width="100%"
       justifyContent="center"
       spacingBottom="40px"
+      color={Color.PRIMARY}
     >
       <VStack gap={30} width="100%" spacingTop="40px" spacingBottom="40px">
         <ImageTextOverlay
@@ -92,20 +95,20 @@ const AboutSectionMobile = () => {
           textComponent={
             <VStack
               gap={20}
-              color={Color.PRIMARY}
+              color={Color.SECONDARY}
               spacingTop="30px"
-              spacingBottom="30px"
+              spacingBottom="40px"
               spacingHorizontal="40px"
               marginHorizontal="40px"
             >
-              <TextTitle color={Color.WHITE}>about vimimade</TextTitle>
-              <TextBody color={Color.WHITE}>
+              <TextTitle color={Color.PRIMARY}>about vimimade</TextTitle>
+              <TextBody color={Color.PRIMARY}>
                 Hello there, my name is Vimi! I started my ceramics journey in
                 June 2024 as an outlet for some heavy emotions I was dealing
                 with at the time. Very quickly, I became obsessed with creating
                 bowls, plates, etc with my own two hands.
               </TextBody>
-              <TextBody color={Color.WHITE}>
+              <TextBody color={Color.PRIMARY}>
                 Vimimade is a project I started with the goal of living more
                 intentionally. I want to nourish my soul with the joy that
                 springs from creativity. Thank you for all your support and I

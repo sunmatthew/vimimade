@@ -8,6 +8,7 @@ export const TextTitle = ({
   letterSpacing,
   fontWeightOverride,
   sizeOverride,
+  lineHeightOverride,
 }) => {
   const style = {
     ...textStyle,
@@ -17,6 +18,7 @@ export const TextTitle = ({
     margin: 0,
     textAlign: textAlign,
     letterSpacing: letterSpacing,
+    lineHeight: lineHeightOverride ? lineHeightOverride : 1.4,
   };
 
   return <p style={style}>{children}</p>;
