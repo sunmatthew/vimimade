@@ -46,7 +46,7 @@ export const Button = ({
           : Size.BODY,
     color: textColor ? textColor : Color.BLACK,
     margin: 0,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
   };
 
   return (

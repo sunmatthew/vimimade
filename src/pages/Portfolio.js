@@ -160,10 +160,10 @@ const Portfolio = () => {
         align="center"
         gap={2}
         textColor={Color.PRIMARY}
-        vSpacing={10}
+        vSpacing={7}
         isFixed
         logo={LOGO}
-        logoText="VIMIMADE"
+        // logoText="VIMIMADE"
         logoRoute="/"
       >
         <NavbarItem label="about" route="/" onClick={handleAboutClick} />
@@ -185,7 +185,11 @@ const Portfolio = () => {
           spacingBottom="160px"
           style={{ padding: isSmallScreen ? '0 20px' : 0 }}
         >
-          <TextTitle color={Color.WHITE} textAlign="center">
+          <TextTitle
+            color={Color.WHITE}
+            textAlign="center"
+            letterSpacing="10px"
+          >
             PORTFOLIO
           </TextTitle>
           <VStack gap={10}>

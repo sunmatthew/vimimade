@@ -40,9 +40,11 @@ export const TextInput = ({
     <div style={containerStyle}>
       {type === 'area' ? (
         <VStack>
-          <TextBody color={Color.WHITE} variants={['bold']}>
-            {label}
-          </TextBody>
+          {label && (
+            <TextBody color={Color.WHITE} variants={['bold']}>
+              {label}
+            </TextBody>
+          )}
           <textarea
             value={value}
             onChange={handleChange}
@@ -53,9 +55,11 @@ export const TextInput = ({
         </VStack>
       ) : (
         <VStack>
-          <TextBody color={Color.WHITE} variants={['bold']}>
-            {label}
-          </TextBody>
+          {label && (
+            <TextBody color={Color.WHITE} variants={['bold']}>
+              {label}
+            </TextBody>
+          )}
           <input
             type={type}
             value={value}

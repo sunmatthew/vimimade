@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Color } from '../../styles/color';
 import { TextBody } from '../text/TextBody';
+import { Size } from '../text/shared';
 import { HStack } from './HStack';
 import MobileMenu from '../../images/mobile-menu.png';
 import CloseMenu from '../../images/mobile-close-menu-icon.png';
@@ -23,7 +24,7 @@ export const Navbar = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [horizontalPadding, setHorizontalPadding] = useState('100px');
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
 
   useEffect(() => {
     const handleResize = () => {
@@ -33,7 +34,7 @@ export const Navbar = ({
       if (isMobileWidth(width)) {
         setHorizontalPadding('20px');
       } else {
-        const vwPadding = Math.min(Math.max(width * 0.05, 40), 120);
+        const vwPadding = Math.min(Math.max(width * 0.05, 20), 50);
         setHorizontalPadding(`${vwPadding}px`);
       }
     };
@@ -66,8 +67,8 @@ export const Navbar = ({
     }
   }, [logoRoute, navigate]);
 
-  const isLogoActive =
-    !logoRoute.startsWith('#') && location.pathname === logoRoute;
+  // const isLogoActive =
+  //   !logoRoute.startsWith('#') && location.pathname === logoRoute;
   const gapStyle = `${gap * 32}px`;
 
   const childStyle = {
@@ -88,10 +89,15 @@ export const Navbar = ({
       onClick={handleLogoClick}
       style={{ cursor: 'pointer', height: '100%' }}
     >
-      <HStack gap={10}>
+      <HStack gap={20}>
         {logo}
         {logoText && (
-          <TextBody variants={isLogoActive ? ['bold'] : []} color={textColor}>
+          <TextBody
+            variants={['bold']}
+            color={textColor}
+            size={Size.BODY_LARGE}
+            letterSpacing="5px"
+          >
             {logoText}
           </TextBody>
         )}

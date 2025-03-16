@@ -5,7 +5,7 @@ import { Color } from '../../styles/color';
 import About from '../../images/about.png';
 import { useWindowSize } from '../../hooks/useWindowSize';
 
-const CONTENT_MAX_WIDTH = 1300;
+const CONTENT_MAX_WIDTH = 1250;
 const CONTENT_BREAKPOINT = 1350;
 
 const getContentWidth = (width) => {
@@ -36,11 +36,19 @@ const AboutSectionDesktop = ({ contentWidth }) => {
       <VStack
         gap={30}
         width={contentWidth}
-        spacingTop="40px"
-        spacingBottom="80px"
+        spacingTop="80px"
+        spacingBottom="100px"
+        marginHorizontal="80px"
       >
-        <HStack justifyContent="center" spacingTop="10px" spacingBottom="10px">
-          <TextTitle color={Color.WHITE}>ABOUT VIMIMADE</TextTitle>
+        <HStack
+          justifyContent="center"
+          spacingTop="10px"
+          spacingBottom="30px"
+          gap={35}
+        >
+          <TextTitle color={Color.WHITE} letterSpacing="10px">
+            ABOUT VIMIMADE
+          </TextTitle>
         </HStack>
         <Box gap={40} width="100%" alignItems="center">
           <img src={About} width="50%" style={{ objectFit: 'cover' }} />
@@ -100,15 +108,8 @@ const AboutSectionMobile = () => {
               <TextBody color={Color.WHITE}>
                 Vimimade is a project I started with the goal of living more
                 intentionally. I want to nourish my soul with the joy that
-                springs from creativity. My artist stamp and logo, which I
-                engrave by hand on each individual item I create, is a drawing
-                of my dog Tofu's face. In that way, I keep him close to my heart
-                and eternal.
-              </TextBody>
-              <TextBody color={Color.WHITE}>
-                Through Vimimade, I hope to share a piece of both myself and
-                Tofu with the world. Thank you for all your support and I look
-                forward to what the future has in store!
+                springs from creativity. Thank you for all your support and I
+                look forward to what the future has in store!
               </TextBody>
             </VStack>
           }

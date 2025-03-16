@@ -106,8 +106,8 @@ export const ContactSection = ({ isSmallScreen }) => {
                   render={({ field }) => (
                     <TextInput
                       {...field}
-                      label="Name"
-                      placeholder="Enter name here"
+                      label={isSmallScreen ? 'Name' : undefined}
+                      placeholder={isSmallScreen ? undefined : 'Name'}
                       error={errors.name ? true : ''}
                       width="100%"
                     />
@@ -119,9 +119,9 @@ export const ContactSection = ({ isSmallScreen }) => {
                   render={({ field }) => (
                     <TextInput
                       {...field}
-                      label="Email"
+                      label={isSmallScreen ? 'Email' : undefined}
                       type="email"
-                      placeholder="Enter email here"
+                      placeholder={isSmallScreen ? undefined : 'Email'}
                       error={errors.email ? true : ''}
                       width="100%"
                     />
@@ -134,10 +134,10 @@ export const ContactSection = ({ isSmallScreen }) => {
                 render={({ field }) => (
                   <TextInput
                     {...field}
-                    label="Message"
+                    label={isSmallScreen ? 'Message' : undefined}
                     type="area"
                     error={errors.message ? true : ''}
-                    placeholder="Enter message here"
+                    placeholder={isSmallScreen ? undefined : 'Message'}
                     width="100%"
                     textareaRows={isSmallScreen ? 5 : 3}
                   />

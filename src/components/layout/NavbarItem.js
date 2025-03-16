@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { Size } from '../text/shared';
 import { TextBody } from '../text/TextBody';
 
 export const NavbarItem = ({
@@ -35,7 +36,9 @@ export const NavbarItem = ({
       {icon ? (
         icon
       ) : (
-        <TextBody variants={isActive ? ['bold'] : []}>{label}</TextBody>
+        <TextBody variants={isActive ? ['bold'] : []} size={Size.NAVIGATION}>
+          {label}
+        </TextBody>
       )}
     </div>
   );

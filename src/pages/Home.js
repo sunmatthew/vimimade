@@ -64,10 +64,10 @@ const Home = () => {
         color={Color.SECONDARY}
         gap={2}
         textColor={Color.PRIMARY}
-        vSpacing={10}
+        vSpacing={7}
         isFixed
         logo={LOGO}
-        logoText="VIMIMADE"
+        // logoText="VIMIMADE"
         logoRoute="/"
       >
         <NavbarItem label="about" route="#about-section" />

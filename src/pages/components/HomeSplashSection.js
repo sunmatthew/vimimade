@@ -6,6 +6,7 @@ import { Button } from '../../components/button';
 import { Color } from '../../styles/color';
 import BG from '../../images/bg-white.JPEG';
 import { useWindowSize } from '../../hooks/useWindowSize';
+import { Size } from '../../components/text/shared';
 
 const CONTENT_MAX_WIDTH = 1300;
 const CONTENT_BREAKPOINT = 1350;
@@ -66,7 +67,12 @@ export const HomeSplashSection = ({ isSmallScreen }) => {
               gap={20}
             >
               <VStack alignItems="center" gap={10}>
-                <TextTitle color={Color.WHITE}>
+                <TextTitle
+                  color={Color.WHITE}
+                  letterSpacing="10px"
+                  sizeOverride={Size.TITLE_BIG}
+                  fontWeightOverride="600"
+                >
                   {isSmallScreen
                     ? SPLASH_CONTENT.SMALL_SCREEN.title
                     : SPLASH_CONTENT.DEFAULT.title}
