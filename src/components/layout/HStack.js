@@ -12,6 +12,7 @@ export const HStack = ({
   spacingHorizontal = 0,
   spacingBottom = 0,
   spacingTop = 0,
+  marginHorizontal = 0,
   flexDirection = 'row',
 }) => {
   const stackStyle = {
@@ -27,6 +28,8 @@ export const HStack = ({
     paddingLeft: spacingHorizontal,
     paddingTop: spacingTop,
     paddingBottom: spacingBottom,
+    marginRight: marginHorizontal,
+    marginLeft: marginHorizontal,
   };
 
   return (

@@ -4,7 +4,7 @@ import { Size, textStyle } from './shared';
 export const TextTitle = ({ children, color, textAlign }) => {
   const style = {
     ...textStyle,
-    fontWeight: 'bold',
+    fontWeight: '500',
     fontSize: Size.TITLE,
     color: color,
     margin: 0,

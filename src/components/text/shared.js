@@ -2,8 +2,8 @@ import { Color } from '../../styles/color';
 import { FONTS } from '../../constants/fonts';
 
 export const Size = {
-  TITLE: '64px',
-  BODY: '24px',
+  TITLE: '48px',
+  BODY: '18px',
   ERROR: '12px',
   BODY_SMALL: '18px',
   BODY_LARGE: '32px',

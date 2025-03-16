@@ -52,7 +52,7 @@ const Commissions = () => {
   return (
     <VStack color={Color.PRIMARY} isPageContainer>
       <Navbar
-        color={Color.BEIGHT_DARK}
+        color={Color.SECONDARY}
         align="center"
         gap={2}
         textColor={Color.PRIMARY}

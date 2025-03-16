@@ -51,7 +51,7 @@ export const ContactSection = ({ isSmallScreen }) => {
       justifyContent="center"
       spacingBottom="80px"
     >
-      <VStack width={contentWidth} gap={20}>
+      <VStack width={contentWidth} gap={20} marginHorizontal="40px">
         <HStack justifyContent="center" spacingTop="60px">
           <TextTitle color={Color.WHITE}>contact</TextTitle>
         </HStack>
@@ -92,7 +92,7 @@ export const ContactSection = ({ isSmallScreen }) => {
             <VStack width="100%" gap={10}>
               <Box
                 justifyContent="space-between"
-                gap={40}
+                gap={10}
                 smallScreenGap={10}
                 alignItems="start"
                 width="100%"
@@ -106,9 +106,10 @@ export const ContactSection = ({ isSmallScreen }) => {
                   render={({ field }) => (
                     <TextInput
                       {...field}
-                      placeholder="Name"
+                      label="Name"
+                      placeholder="Enter name here"
                       error={errors.name ? true : ''}
-                      width={isSmallScreen ? '100%' : '45%'}
+                      width="100%"
                     />
                   )}
                 />
@@ -118,10 +119,11 @@ export const ContactSection = ({ isSmallScreen }) => {
                   render={({ field }) => (
                     <TextInput
                       {...field}
-                      placeholder="Email"
+                      label="Email"
                       type="email"
+                      placeholder="Enter email here"
                       error={errors.email ? true : ''}
-                      width={isSmallScreen ? '100%' : '45%'}
+                      width="100%"
                     />
                   )}
                 />
@@ -132,21 +134,25 @@ export const ContactSection = ({ isSmallScreen }) => {
                 render={({ field }) => (
                   <TextInput
                     {...field}
-                    placeholder="Message"
+                    label="Message"
                     type="area"
                     error={errors.message ? true : ''}
+                    placeholder="Enter message here"
                     width="100%"
+                    textareaRows={isSmallScreen ? 5 : 3}
                   />
                 )}
               />
 
-              <Button
-                content="Submit"
-                type="submit"
-                color={Color.PRIMARY}
-                textColor={Color.WHITE}
-                size="small"
-              />
+              <Box spacingTop="10px">
+                <Button
+                  content="Submit"
+                  type="submit"
+                  color={Color.PRIMARY}
+                  textColor={Color.WHITE}
+                  size="small"
+                />
+              </Box>
             </VStack>
           </form>
         </VStack>

@@ -12,6 +12,7 @@ export const VStack = ({
   spacingHorizontal = 0,
   spacingBottom = 0,
   spacingTop = 0,
+  marginHorizontal = 0,
   style,
 }) => {
   const pageContainerStyle = {
@@ -39,6 +40,8 @@ export const VStack = ({
     paddingLeft: spacingHorizontal,
     paddingTop: spacingTop,
     paddingBottom: spacingBottom,
+    marginRight: marginHorizontal,
+    marginLeft: marginHorizontal,
     ...style,
   };
 

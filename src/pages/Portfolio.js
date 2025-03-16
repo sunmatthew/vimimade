@@ -156,12 +156,11 @@ const Portfolio = () => {
   return (
     <VStack color={Color.PRIMARY} isPageContainer>
       <Navbar
-        color={Color.BEIGHT_DARK}
+        color={Color.SECONDARY}
         align="center"
         gap={2}
         textColor={Color.PRIMARY}
         vSpacing={10}
-        isBottom
         isFixed
         logo={LOGO}
         logoText="VIMIMADE"
@@ -176,7 +175,7 @@ const Portfolio = () => {
       <VStack
         width="100%"
         alignItems="center"
-        spacingTop="60px"
+        spacingTop="120px"
         spacingBottom="160px"
       >
         <VStack

@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { VStack, Navbar, NavbarItem } from '../components/layout';
-import { FloatingButton } from '../components/button';
 import { ContactSection } from './components/ContactSection';
 import { AboutSection } from './components/AboutSection';
 import { HomeSplashSection } from './components/HomeSplashSection';
@@ -10,7 +9,6 @@ import { useWindowSize } from '../hooks/useWindowSize';
 import { Color } from '../styles/color';
 import { isMobileWidth, isTabletWidth } from '../constants/breakpoints';
 import Logo from '../images/logo-no-text.png';
-import IG from '../images/ig-logo.png';
 
 const LOGO = <img src={Logo} alt="Vimimade Logo" width="35px" />;
 
@@ -60,10 +58,6 @@ const Home = () => {
     return () => setHasScrolled(false);
   }, []);
 
-  const handleIGClick = useCallback(() => {
-    window.open('https://www.instagram.com/vimimade/', '_blank');
-  }, []);
-
   return (
     <VStack isPageContainer>
       <Navbar
@@ -85,13 +79,6 @@ const Home = () => {
       <HomeSplashSection isSmallScreen={isMobileView} />
       <AboutSection isSmallScreen={isTabletView || isMobileView} />
       <ContactSection isSmallScreen={isMobileView} />
-
-      <FloatingButton
-        icon={IG}
-        align="right"
-        onClick={handleIGClick}
-        isBottom
-      />
     </VStack>
   );
 };

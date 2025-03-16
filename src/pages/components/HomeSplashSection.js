@@ -15,6 +15,17 @@ const getContentWidth = (width) => {
   return `${CONTENT_MAX_WIDTH}px`;
 };
 
+const SPLASH_CONTENT = {
+  DEFAULT: {
+    title: 'VIMIMADE CERAMICS',
+    text: 'Welcome to Vimimade, a site dedicated to my passion for pottery and all things ceramic. This is a creative space where I showcase my handmade creations, all meticulously designed and crafted by me (Vimi). Each piece is one-of-a-kind and made with care and attention to detail, inspired by the beauty of everyday life and the balance between form and function. Feel free to browse, explore, and enjoy your time here!',
+  },
+  SMALL_SCREEN: {
+    title: 'hello!',
+    text: 'Welcome to Vimimade, a site dedicated to my passion for pottery. Feel free to browse my handmade cermamic collection and enjoy your time here. :)',
+  },
+};
+
 const bgStyle = {
   width: '100%',
   justifyContent: 'center',
@@ -55,15 +66,15 @@ export const HomeSplashSection = ({ isSmallScreen }) => {
               gap={20}
             >
               <VStack alignItems="center" gap={10}>
-                <TextTitle color={Color.WHITE}>VIMIMADE CERAMICS</TextTitle>
+                <TextTitle color={Color.WHITE}>
+                  {isSmallScreen
+                    ? SPLASH_CONTENT.SMALL_SCREEN.title
+                    : SPLASH_CONTENT.DEFAULT.title}
+                </TextTitle>
                 <TextBody color={Color.WHITE} textAlign="center">
-                  Welcome to Vimimade, a site dedicated to my passion for
-                  pottery and all things ceramic. This is a creative space where
-                  I showcase my handmade creations, all meticulously designed
-                  and crafted by me (Vimi). Each piece is one-of-a-kind and made
-                  with care and attention to detail, inspired by the beauty of
-                  everyday life and the balance between form and function. Feel
-                  free to browse, explore, and enjoy your time here!
+                  {isSmallScreen
+                    ? SPLASH_CONTENT.SMALL_SCREEN.text
+                    : SPLASH_CONTENT.DEFAULT.text}
                 </TextBody>
               </VStack>
 
